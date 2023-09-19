@@ -136,3 +136,10 @@ const holidays = [{
 ];
 
 
+// Get the current date
+const currentDateElement = document.getElementById('currentDate');
+const currentDate = new Date();
+
+currentDateElement.innerHTML = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+
+
