@@ -143,3 +143,38 @@ const currentDate = new Date();
 currentDateElement.innerHTML = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
 
+// Function to toggle between sun and moon icons
+function toggleThemeIcon() {
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    // Check the current theme
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+
+    if (currentTheme === 'dark') {
+        // If dark theme is active, show the moon icon and hide the sun icon
+        sunIcon.style.display = 'inline';
+        moonIcon.style.display = 'none';
+    } else {
+        // If light theme is active, show the sun icon and hide the moon icon
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'inline';
+    }
+}
+
+// Initial call to set the correct icon based on the current theme
+toggleThemeIcon();
+
+// Add a click event listener to the themeToggle link
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the link from navigating
+
+    // Toggle the 'data-bs-theme' attribute between 'dark' and 'light'
+    document.documentElement.setAttribute('data-bs-theme',
+        document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
+    );
+
+    // Call the function to toggle the icons based on the updated theme
+    toggleThemeIcon();
+});
