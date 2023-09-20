@@ -151,39 +151,6 @@ const holidays = [
     },
 ];
 
-
-// Get the current date
-const currentDateElement = document.getElementById('currentDate');
-const currentDate = new Date();
-
-currentDateElement.innerHTML = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
-
-// Function to format a date as 'YYYY-MM-DD'
-function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-
-// Get the current date formatted as 'YYYY-MM-DD'
-const currentDateFormatted = formatDate(new Date());
-
-// Find a holiday for today's date
-const todayHoliday = holidays.find(holiday => holiday.date === currentDateFormatted);
-
-// Get the currentEvent element
-const currentEventElement = document.getElementById('currentEvent');
-
-if (todayHoliday) {
-    // If there is a holiday, display its name
-    currentEventElement.innerHTML = todayHoliday.name;
-} else {
-    // If there is no holiday, display "Tidak Ada Tanggal Merah"
-    currentEventElement.innerHTML = "Tidak Ada Tanggal Merah";
-}
-
-
 // Function to toggle between sun and moon icons
 function toggleThemeIcon() {
     const sunIcon = document.getElementById('sunIcon');
@@ -219,3 +186,134 @@ themeToggle.addEventListener('click', (event) => {
     // Call the function to toggle the icons based on the updated theme
     toggleThemeIcon();
 });
+
+
+// Get the current date
+const currentDateElement = document.getElementById('currentDate');
+const currentDate = new Date();
+
+currentDateElement.innerHTML = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+
+// Function to format a date as 'YYYY-MM-DD'
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// Get the current date formatted as 'YYYY-MM-DD'
+const currentDateFormatted = formatDate(new Date());
+
+// Find a holiday for today's date
+const todayHoliday = holidays.find(holiday => holiday.date === currentDateFormatted);
+
+// Get the currentEvent element
+const currentEventElement = document.getElementById('currentEvent');
+
+if (todayHoliday) {
+    // If there is a holiday, display its name
+    currentEventElement.innerHTML = todayHoliday.name;
+} else {
+    // If there is no holiday, display "Tidak Ada Tanggal Merah"
+    currentEventElement.innerHTML = "Tidak Ada Tanggal Merah";
+}
+
+
+// Function to find the closest upcoming holiday
+function findClosestUpcomingHoliday() {
+    const currentDate = new Date();
+    const currentDateFormatted = formatDate(currentDate);
+
+    // Sort the holidays by date in ascending order
+    holidays.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB;
+    });
+
+    // Find the closest upcoming holiday
+    for (const holiday of holidays) {
+        if (holiday.date >= currentDateFormatted) {
+            return holiday;
+        }
+    }
+
+    return null; // If there are no upcoming holidays
+}
+
+// Function to calculate the time difference between two dates
+function getTimeDifference(targetDate) {
+    const currentDate = new Date();
+    const timeDifference = targetDate - currentDate;
+    
+    const seconds = Math.floor((timeDifference / 1000) % 60);
+    const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+    const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    
+    return {
+        days,
+        hours,
+        minutes,
+        seconds,
+    };
+}
+
+
+function formatDateWithDay(dateString) {
+    const date = new Date(dateString);
+    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    return date.toLocaleDateString('id-ID', options);
+}
+
+const upcomingHoliday = findClosestUpcomingHoliday();
+
+const upcomingEventNameElement = document.getElementById('upcomingEventName');
+const upcomingEventDateElement = document.getElementById('upcomingEventDate');
+const upcomingEventCountdownElement = document.getElementById('upcomingEventCountdown');
+
+if (upcomingHoliday) {
+    const formattedDate = formatDateWithDay(upcomingHoliday.date);
+
+    upcomingEventNameElement.innerHTML = `${upcomingHoliday.name}`;
+    upcomingEventDateElement.innerHTML = `${formattedDate}`;
+} else {
+    upcomingEventNameElement.innerHTML = "Tidak Ada Tanggal Merah";
+    upcomingEventDateElement.innerHTML = "";
+}
+
+// Function to update the countdown
+function updateCountdown() {
+    const upcomingEventCountdownElement = document.getElementById('upcomingCountDown');
+
+    if (upcomingHoliday) {
+        const targetDate = new Date(upcomingHoliday.date);
+        const currentDate = new Date();
+
+        // Calculate the time difference
+        const timeDifference = targetDate - currentDate;
+
+        if (timeDifference > 0) {
+            const seconds = Math.floor((timeDifference / 1000) % 60);
+            const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Update the countdown element
+            upcomingEventCountdownElement.textContent = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+        } else {
+            // If the target date has passed, display a message
+            upcomingEventCountdownElement.textContent = "Libur Telah Berlalu";
+        }
+    } else {
+        // If there are no upcoming holidays, display an empty message
+        upcomingEventCountdownElement.textContent = "";
+    }
+}
+
+// Call the updateCountdown function initially
+updateCountdown();
+
+// Update the countdown every second
+setInterval(updateCountdown, 1000);
