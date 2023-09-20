@@ -156,8 +156,8 @@ function toggleThemeIcon() {
     const sunIcon = document.getElementById('sunIcon');
     const moonIcon = document.getElementById('moonIcon');
 
-    // Check the current theme
-    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+    // Check the current theme from localStorage
+    const currentTheme = localStorage.getItem('theme');
 
     if (currentTheme === 'dark') {
         // If dark theme is active, show the moon icon and hide the sun icon
@@ -170,8 +170,26 @@ function toggleThemeIcon() {
     }
 }
 
-// Initial call to set the correct icon based on the current theme
-toggleThemeIcon();
+// Function to set the theme preference in localStorage
+function setThemePreference(theme) {
+    localStorage.setItem('theme', theme);
+}
+
+// Function to check and set the theme preference initially
+function checkAndSetTheme() {
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-bs-theme', 'light');
+    }
+    
+    toggleThemeIcon();
+}
+
+// Initial call to check and set the theme
+checkAndSetTheme();
 
 // Add a click event listener to the themeToggle link
 const themeToggle = document.getElementById('themeToggle');
@@ -179,9 +197,12 @@ themeToggle.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent the link from navigating
 
     // Toggle the 'data-bs-theme' attribute between 'dark' and 'light'
-    document.documentElement.setAttribute('data-bs-theme',
-        document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark'
-    );
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', newTheme);
+
+    // Set the theme preference in localStorage
+    setThemePreference(newTheme);
 
     // Call the function to toggle the icons based on the updated theme
     toggleThemeIcon();
