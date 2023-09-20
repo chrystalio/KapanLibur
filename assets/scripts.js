@@ -142,6 +142,31 @@ const currentDate = new Date();
 
 currentDateElement.innerHTML = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
+// Function to format a date as 'YYYY-MM-DD'
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// Get the current date formatted as 'YYYY-MM-DD'
+const currentDateFormatted = formatDate(new Date());
+
+// Find a holiday for today's date
+const todayHoliday = holidays.find(holiday => holiday.date === currentDateFormatted);
+
+// Get the currentEvent element
+const currentEventElement = document.getElementById('currentEvent');
+
+if (todayHoliday) {
+    // If there is a holiday, display its name
+    currentEventElement.innerHTML = todayHoliday.name;
+} else {
+    // If there is no holiday, display "Tidak Ada Tanggal Merah"
+    currentEventElement.innerHTML = "Tidak Ada Tanggal Merah";
+}
+
 
 // Function to toggle between sun and moon icons
 function toggleThemeIcon() {
