@@ -5,6 +5,16 @@ const holidays = [
         name: 'Maulid Nabi Muhammad SAW',
     },
     {
+        date: '2023-12-25',
+        day: 'Senin',
+        name: 'Hari Raya Natal',
+    },
+    {
+        date: '2023-12-26',
+        day: 'Selasa',
+        name: 'Cuti Bersama Natal',
+    },
+    {
         date: '2024-01-01',
         day: 'Senin',
         name: 'Tahun Baru 2024 Masehi',
