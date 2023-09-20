@@ -160,30 +160,11 @@ function toggleThemeIcon() {
     const currentTheme = localStorage.getItem('theme');
 
     if (currentTheme === 'dark') {
-        // If dark theme is active, show the moon icon and hide the sun icon
+        // If dark theme is active, show the sun icon and hide the moon icon
         sunIcon.style.display = 'inline';
         moonIcon.style.display = 'none';
     } else {
-        // If light theme is active, show the sun icon and hide the moon icon
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'inline';
-    }
-}
-
-// Function to toggle between sun and moon icons
-function toggleThemeIcon() {
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-
-    // Check the current theme from localStorage
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'dark') {
-        // If dark theme is active, show the moon icon and hide the sun icon
-        sunIcon.style.display = 'inline';
-        moonIcon.style.display = 'none';
-    } else {
-        // If light theme is active, show the sun icon and hide the moon icon
+        // If light theme is active, show the moon icon and hide the sun icon
         sunIcon.style.display = 'none';
         moonIcon.style.display = 'inline';
     }
@@ -203,7 +184,7 @@ function checkAndSetTheme() {
     const initialTheme = currentTheme || systemTheme;
 
     document.documentElement.setAttribute('data-bs-theme', initialTheme);
-    toggleThemeIcon();
+    toggleThemeIcon(); // Set the icon based on the initial theme
     setThemePreference(initialTheme);
 }
 
