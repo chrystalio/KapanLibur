@@ -1,4 +1,10 @@
-const holidays = [{
+const holidays = [
+    {
+        date: '2023-09-28',
+        day: 'Kamis',
+        name: 'Maulid Nabi Muhammad SAW',
+    },
+    {
         date: '2024-01-01',
         day: 'Senin',
         name: 'Tahun Baru 2024 Masehi',
