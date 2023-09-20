@@ -170,6 +170,25 @@ function toggleThemeIcon() {
     }
 }
 
+// Function to toggle between sun and moon icons
+function toggleThemeIcon() {
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    // Check the current theme from localStorage
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        // If dark theme is active, show the moon icon and hide the sun icon
+        sunIcon.style.display = 'inline';
+        moonIcon.style.display = 'none';
+    } else {
+        // If light theme is active, show the sun icon and hide the moon icon
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'inline';
+    }
+}
+
 // Function to set the theme preference in localStorage
 function setThemePreference(theme) {
     localStorage.setItem('theme', theme);
@@ -178,14 +197,14 @@ function setThemePreference(theme) {
 // Function to check and set the theme preference initially
 function checkAndSetTheme() {
     const currentTheme = localStorage.getItem('theme');
-    
-    if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-bs-theme', 'dark');
-    } else {
-        document.documentElement.setAttribute('data-bs-theme', 'light');
-    }
-    
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    // Use the system theme if there's no theme preference in localStorage
+    const initialTheme = currentTheme || systemTheme;
+
+    document.documentElement.setAttribute('data-bs-theme', initialTheme);
     toggleThemeIcon();
+    setThemePreference(initialTheme);
 }
 
 // Initial call to check and set the theme
@@ -207,6 +226,7 @@ themeToggle.addEventListener('click', (event) => {
     // Call the function to toggle the icons based on the updated theme
     toggleThemeIcon();
 });
+
 
 
 // Get the current date
