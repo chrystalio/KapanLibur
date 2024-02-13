@@ -30,6 +30,11 @@ const holidays = [
         name: 'Tahun Baru Imlek 2575 Kongzili',
     },
     {
+        date: '2024-02-14',
+        day: 'Rabu',
+        name: 'Hari Pemilihan Umum',
+    },
+    {
         date: '2024-03-11',
         day: 'Senin',
         name: 'Hari Suci Nyepi Tahun Baru Saka 1946',
