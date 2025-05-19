@@ -154,6 +154,141 @@ const holidays = [
         day: 'Kamis',
         name: 'Cuti Bersama Hari Raya Natal',
     },
+    {
+        "date": "2025-01-01",
+        "day": "Rabu",
+        "name": "Tahun Baru 2025 Masehi"
+    },
+    {
+        "date": "2025-01-27",
+        "day": "Senin",
+        "name": "Isra Mikraj Nabi Muhammad S.A.W."
+    },
+    {
+        "date": "2025-01-28",
+        "day": "Selasa",
+        "name": "Tahun Baru Imlek 2576 Kongzili"
+    },
+    {
+        "date": "2025-01-29",
+        "day": "Rabu",
+        "name": "Tahun Baru Imlek 2576 Kongzili"
+    },
+    {
+        "date": "2025-03-28",
+        "day": "Jumat",
+        "name": "Hari Suci Nyepi (Tahun Baru Saka 1947)"
+    },
+    {
+        "date": "2025-03-29",
+        "day": "Sabtu",
+        "name": "Hari Suci Nyepi (Tahun Baru Saka 1947)"
+    },
+    {
+        "date": "2025-03-31",
+        "day": "Senin",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-01",
+        "day": "Selasa",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-02",
+        "day": "Rabu",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-03",
+        "day": "Kamis",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-04",
+        "day": "Jumat",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-07",
+        "day": "Senin",
+        "name": "Idul Fitri 1446 Hijriah"
+    },
+    {
+        "date": "2025-04-18",
+        "day": "Jumat",
+        "name": "Wafat Yesus Kristus"
+    },
+    {
+        "date": "2025-04-20",
+        "day": "Minggu",
+        "name": "Kebangkitan Yesus Kristus (Paskah)"
+    },
+    {
+        "date": "2025-05-01",
+        "day": "Kamis",
+        "name": "Hari Buruh Internasional"
+    },
+    {
+        "date": "2025-05-12",
+        "day": "Senin",
+        "name": "Hari Raya Waisak 2569 BE"
+    },
+    {
+        "date": "2025-05-13",
+        "day": "Selasa",
+        "name": "Hari Raya Waisak 2569 BE"
+    },
+    {
+        "date": "2025-05-29",
+        "day": "Kamis",
+        "name": "Kenaikan Yesus Kristus"
+    },
+    {
+        "date": "2025-05-30",
+        "day": "Jumat",
+        "name": "Kenaikan Yesus Kristus"
+    },
+    {
+        "date": "2025-06-01",
+        "day": "Minggu",
+        "name": "Hari Lahir Pancasila"
+    },
+    {
+        "date": "2025-06-06",
+        "day": "Jumat",
+        "name": "Idul Adha 1446 Hijriah"
+    },
+    {
+        "date": "2025-06-09",
+        "day": "Senin",
+        "name": "Idul Adha 1446 Hijriah"
+    },
+    {
+        "date": "2025-06-27",
+        "day": "Jumat",
+        "name": "1 Muharam Tahun Baru Islam 1447 Hijriah"
+    },
+    {
+        "date": "2025-08-17",
+        "day": "Minggu",
+        "name": "Proklamasi Kemerdekaan"
+    },
+    {
+        "date": "2025-09-05",
+        "day": "Jumat",
+        "name": "Maulid Nabi Muhammad S.A.W."
+    },
+    {
+        "date": "2025-12-25",
+        "day": "Kamis",
+        "name": "Kelahiran Yesus Kristus"
+    },
+    {
+        "date": "2025-12-26",
+        "day": "Jumat",
+        "name": "Kelahiran Yesus Kristus"
+    }
 ];
 
 // Function to toggle between sun and moon icons
@@ -273,12 +408,12 @@ function findClosestUpcomingHoliday() {
 function getTimeDifference(targetDate) {
     const currentDate = new Date();
     const timeDifference = targetDate - currentDate;
-    
+
     const seconds = Math.floor((timeDifference / 1000) % 60);
     const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
     const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    
+
     return {
         days,
         hours,
