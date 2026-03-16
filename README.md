@@ -66,7 +66,11 @@ KapanLibur/
 │   ├── api.js          # API client functions with caching
 │   ├── app.js          # Main application logic
 │   └── calendar.ico    # Favicon
+|   images/
+|   └── og-image.png    # og-image
 └── README.md           # This file
+└── robots.txt          # Robots.txt
+└── sitemap.xml         # sitemap
 ```
 
 ## API
