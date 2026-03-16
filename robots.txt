@@ -1,0 +1,7 @@
+# robots.txt for KapanLibur
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kapanlibur.krisdev.my.id/sitemap.xml
