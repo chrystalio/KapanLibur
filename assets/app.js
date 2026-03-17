@@ -285,7 +285,7 @@ function renderSuggestions() {
         suggestionsList.innerHTML = nearbySuggestions.map((s, index) => {
             const holidayDate = new Date(s.holiday.date);
             return `
-                <div class="suggestion-card" style="animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + (index * 0.1)}s both;">
+                <div class="suggestion-card" role="listitem" style="animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + (index * 0.1)}s both;">
                     <div class="suggestion-header">
                         <div class="suggestion-date-badge">
                             <span class="suggestion-date-month">${holidayDate.toLocaleDateString(getLang() === 'id' ? 'id-ID' : 'en-US', { month: 'short' }).toUpperCase()}</span>
@@ -295,22 +295,11 @@ function renderSuggestions() {
                             <div class="suggestion-title">${s.holiday.name}</div>
                             <div class="suggestion-meta">
                                 <i class='bx bx-time-five'></i>
-                                <span>${formatDateRange(s.period.start, s.period.end, getLang())}</span>
+                                <span>${formatDateRange(s.period.start, s.period.end, getLang())} | <i class='bx bx-briefcase-alt'></i> ${s.leave_days_required} ${t('leaveDays')}</span>
                             </div>
                         </div>
                     </div>
                     <div class="suggestion-reason">${s.reason}</div>
-                    <div class="suggestion-footer">
-                        <div class="suggestion-stats">
-                            <div class="suggestion-stat">
-                                <span class="suggestion-stat-value">${s.total_days_off}</span>
-                                <span class="suggestion-stat-label">${t('days')}</span>
-                            </div>
-                        </div>
-                        <div class="suggestion-leave-badge">
-                            ${s.leave_days_required} ${t('leaveDays')}
-                        </div>
-                    </div>
                 </div>
             `;
         }).join('');
